@@ -1,17 +1,24 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"net"
 )
 
 func main() {
-	_, err := net.Dial("tcp", "192.168.1.1:80")
-	if err != nil {
-		log.Println(err)
-		log.Println("closed")
-		return
+	for i := 1; i <= 100; i++ {
+		res := scanport("192.168.1.1", i)
+		if res {
+			log.Printf("%d open", i)
+		}
 	}
+}
 
-	log.Println("open")
+func scanport(addr string, p int) bool {
+	addrport := fmt.Sprintf("%s:%d", addr, p)
+
+	_, err := net.Dial("tcp", addrport)
+
+	return err == nil
 }
