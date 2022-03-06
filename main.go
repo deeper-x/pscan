@@ -10,7 +10,7 @@ func main() {
 	for i := 1; i <= 100; i++ {
 		res := scanport("192.168.1.1", i)
 		if res {
-			log.Printf("%d open", i)
+			log.Printf("%d: open", i)
 		}
 	}
 }
