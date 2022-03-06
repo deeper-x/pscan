@@ -4,11 +4,18 @@ import (
 	"fmt"
 	"log"
 	"net"
+	"os"
 )
 
 func main() {
-	for i := 1; i <= 65535; i++ {
-		res := scanport("192.168.1.1", i)
+	if len(os.Args[:]) != 2 {
+		log.Println("missing destination")
+		return
+	}
+
+	inaddr := os.Args[1]
+	for i := 1; i <= 1024; i++ {
+		res := scanport(inaddr, i)
 		if res {
 			log.Printf("%d: open", i)
 		}
